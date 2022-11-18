@@ -1,0 +1,51 @@
+[package]
+name = "bevy_audio_visualizer"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+bevy_egui = "0.17"
+
+# amplify = "3.13"
+
+# Patch amplify, this makes it where Wrapper::Inner doesn't require Clone
+# [patch.crates-io.amplify]
+# git = "https://github.com/Ricky12Awesome/rust-amplify"
+# rev = "65985eee5fcbc04b754aa71ff06aaaaa2cab0c0c"
+
+[dependencies.safav]
+path = "../safav"
+
+[dependencies.bevy]
+version = "0.9"
+# Copied frm default and render, with ones I don't need disabled
+features = [
+#    "animation",
+    "bevy_asset",
+#    "bevy_audio",
+    "bevy_gilrs",
+    "bevy_scene",
+    "bevy_winit",
+    "bevy_core_pipeline",
+#    "bevy_pbr",
+    "bevy_gltf",
+    "bevy_render",
+    "bevy_sprite",
+    "bevy_text",
+#    "bevy_ui",
+    "png",
+#    "hdr",
+    "vorbis",
+    "x11",
+    "filesystem_watcher",
+]
+
+# Enable a small amount of optimization in debug mode
+[profile.dev]
+opt-level = 1
+
+# Enable high optimizations for dependencies (incl. Bevy), but not for our code:
+[profile.dev.package."*"]
+opt-level = 3
